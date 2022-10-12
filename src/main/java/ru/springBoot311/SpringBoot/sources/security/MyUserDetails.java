@@ -1,9 +1,7 @@
 package ru.springBoot311.SpringBoot.sources.security;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.springBoot311.SpringBoot.sources.model.Role;
 import ru.springBoot311.SpringBoot.sources.model.User;
 
 import java.util.ArrayList;
@@ -24,10 +22,7 @@ public class MyUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
 
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        for (Role role : this.user.getRoles()) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>(this.user.getRoles());
         return grantedAuthorities;
     }
 

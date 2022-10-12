@@ -3,10 +3,11 @@ package ru.springBoot311.SpringBoot.sources.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements GrantedAuthority {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -59,5 +60,10 @@ public class Role {
                 ", name='" + name + '\'' +
                 ", person=" + person +
                 '}';
+    }
+
+    @Override
+    public String getAuthority() {
+        return this.getName();
     }
 }
