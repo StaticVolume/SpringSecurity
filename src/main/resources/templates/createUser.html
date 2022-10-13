@@ -24,9 +24,19 @@
                 <input type="text" th:field="*{age}" id="age" placeholder="enter age"/><br>
                 <div style="color: red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
                 <br><br>
-                <label for="email">Enter email</label><br>
+                <label for="email">Enter age</label><br>
                 <input type="text" th:field="*{email}" id="email" placeholder="enter email"/><br>
                 <div style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+                <br><br>
+                <label for="password">Enter password</label><br>
+                <input type="password" th:field="*{password}" id="password" placeholder="enter password"/><br>
+                <div style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Surname error</div>
+                <br><br>
+                <label for="roles">Chose roles</label><br>
+                <select th:field="*{roles}" th:size="2" id="roles" multiple>
+                    <option th:each="role : ${roles_from_service}" th:value="${role.getName()}" th:text="${role.getName()}"></option>
+                    <div style="color: red" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">Role error</div>
+                </select>
                 <br><br>
             <input type="submit" value="Create new user">
         </form>
