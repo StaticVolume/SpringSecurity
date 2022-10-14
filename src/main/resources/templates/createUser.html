@@ -34,7 +34,7 @@
                 <br><br>
                 <label for="roles">Chose roles</label><br>
                 <select th:field="*{roles}" th:size="2" id="roles" multiple>
-                    <option th:each="role : ${roles_from_service}" th:value="${role.getName()}" th:text="${role.getName()}"></option>
+                    <option th:each="role : ${roles_from_service}" th:value="${role}" th:text="${role}"></option>
                     <div style="color: red" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}">Role error</div>
                 </select>
                 <br><br>

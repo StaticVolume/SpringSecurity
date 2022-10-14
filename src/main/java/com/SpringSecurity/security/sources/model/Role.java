@@ -5,7 +5,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Set;
+import java.util.List;
+
 
 
 @Entity
@@ -23,7 +24,7 @@ public class Role implements GrantedAuthority {
     private String name;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<User> users;
+    private List<User> users;
 
     public Role() {
     }
@@ -32,7 +33,7 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
-    public Role(String name, Set<User> users) {
+    public Role(String name, List<User> users) {
         this.name = name;
         this.users = users;
     }
@@ -54,11 +55,11 @@ public class Role implements GrantedAuthority {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 

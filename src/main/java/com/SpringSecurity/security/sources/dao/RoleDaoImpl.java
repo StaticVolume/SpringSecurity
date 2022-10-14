@@ -6,8 +6,10 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
+
 import java.util.List;
 import java.util.Optional;
+
 
 @Repository
 public class RoleDaoImpl implements RoleDao {

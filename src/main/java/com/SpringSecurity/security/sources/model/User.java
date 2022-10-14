@@ -8,7 +8,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Email;
 
-import java.util.Set;
+import java.util.List;
+
 
 
 @Entity
@@ -49,14 +50,14 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public User() {
 
     }
 
 
-    public User(String name, String surname, int age, String email, Set<Role> roles) {
+    public User(String name, String surname, int age, String email, List<Role> roles) {
         this.name = name;
         this.surname = surname;
         this.age = age;
@@ -114,11 +115,11 @@ public class User {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }

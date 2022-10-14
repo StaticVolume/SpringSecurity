@@ -22,8 +22,8 @@
   <label>Your email : </label><br>
   <span th:text="${user.getEmail()}" ></span><br>
   <br><br>
+  <label>Your role : </label><br>
   <div th:each="role : ${user.getRoles()}">
-    <label>Your role : </label><br>
     <span th:text="${role.getName()}"></span><br>
     <br><br>
   </div>

@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
+
 
 
 @Controller
@@ -63,8 +66,10 @@ public class UserController {
     }
 
     @RequestMapping("admin/createUser")
-    public String createUserForm(Model model){
-        model.addAttribute("roles_from_service", roleService.getRoles());
+    public String createUserForm(Model model) {
+        Set<String> roles = new HashSet<>();
+        roleService.getRoles().stream().forEach(role -> roles.add(role.getName()));
+        model.addAttribute("roles_from_service", roles);
         model.addAttribute("user",new User());
         return "/createUser";
     }
@@ -80,8 +85,10 @@ public class UserController {
 
     @GetMapping("admin/allUsers/{id}/edit")
     public String editUserForm(Model model, @PathVariable("id") long id) {
+       Set<String> roles = new HashSet<>();
+       roleService.getRoles().stream().forEach(role -> roles.add(role.getName()));
         model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("role_from_service", roleService.getRoles());
+        model.addAttribute("role_from_service", roles);
         return "/editUser";
     }
 
@@ -94,6 +101,6 @@ public class UserController {
     @DeleteMapping("admin/allUsers/delete/{id}")
     public String deleteUser( @PathVariable("id") long id) {
         userService.deleteUser(id);
-        return "redirect:admin/allUsers";
+        return "redirect:/admin/allUsers";
     }
 }

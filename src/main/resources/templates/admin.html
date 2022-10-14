@@ -5,7 +5,7 @@
     <title>Admin Page</title>
 </head>
 <body>
-<H1 style="text-align: center">Welcome ADMIN, lets do something with our Users :D</H1>
+<H1 style="text-align: center">Welcome , lets do something with our Users :D</H1>
 <br><br><br>
 <br><br>
 <a href="/logout">Выйти</a>
@@ -28,8 +28,8 @@
     <label>Your email : </label><br>
     <span th:text="${admin.getEmail()}" ></span><br>
     <br><br>
+    <label>Your role : </label><br>
     <div th:each="role : ${admin.getRoles()}">
-        <label>Your role : </label><br>
         <span th:text="${role.getName()}"></span><br>
     </div>
 
