@@ -1,5 +1,6 @@
 package com.SpringSecurity.security.sources.conftroller;
 
+import com.SpringSecurity.security.sources.EnumRoles.EnumRoles;
 import com.SpringSecurity.security.sources.model.Role;
 import com.SpringSecurity.security.sources.model.User;
 import com.SpringSecurity.security.sources.service.RoleService;
@@ -29,9 +30,12 @@ public class UserController {
     private final UserService userService;
     private final RoleService roleService;
 
-    public UserController(UserService userService, RoleService roleService) {
+    private final EnumRoles enumRoles;
+
+    public UserController(UserService userService, RoleService roleService, EnumRoles enumRoles) {
         this.userService = userService;
         this.roleService = roleService;
+        this.enumRoles = enumRoles;
     }
 
 
@@ -67,9 +71,7 @@ public class UserController {
 
     @RequestMapping("admin/createUser")
     public String createUserForm(Model model) {
-        Set<String> roles = new HashSet<>();
-        roleService.getRoles().stream().forEach(role -> roles.add(role.getName()));
-        model.addAttribute("roles_from_service", roles);
+        model.addAttribute("roles_from_service", enumRoles.getSetRoles());
         model.addAttribute("user",new User());
         return "/createUser";
     }
@@ -85,10 +87,8 @@ public class UserController {
 
     @GetMapping("admin/allUsers/{id}/edit")
     public String editUserForm(Model model, @PathVariable("id") long id) {
-       Set<String> roles = new HashSet<>();
-       roleService.getRoles().stream().forEach(role -> roles.add(role.getName()));
         model.addAttribute("user", userService.getUser(id));
-        model.addAttribute("role_from_service", roles);
+        model.addAttribute("role_from_service", enumRoles.getSetRoles());
         return "/editUser";
     }
 
